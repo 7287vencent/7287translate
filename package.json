@@ -10,16 +10,53 @@
 		"Other"
 	],
 	"activationEvents": [
-		"onCommand:7287translate.helloWorld"
+		"onStartupFinished"
 	],
 	"main": "./extension.js",
 	"contributes": {
 		"commands": [
 			{
-				"command": "7287translate.helloWorld",
-				"title": "Hello World"
+				"command": "extension.translate",
+				"title": "7287translate"
+			},
+			{
+				"command": "extension.startTranslate",
+				"title": "翻译并朗读"
 			}
-		]
+		],
+		"keybindings": [
+			{
+				"command": "extension.startTranslate",
+				"key": "ctrl+shift+t",
+				"mac": "cmd+shift+t",
+				"when": "editorHasSelection"
+			}
+		],
+		"menus": {
+			"editor/context": [
+				{
+					"command": "extension.startTranslate",
+					"group": "navigation",
+					"when": "editorHasSelection"
+				}
+			]
+		},
+		"configuration": {
+			"type": "object",
+			"title": "7287translate 设置",
+			"properties": {
+				"7287translate.APIKey": {
+					"type": "String",
+					"default": "",
+					"description": "有道云key"
+				},
+				"7287translate.SecretKey": {
+					"type": "String",
+					"default": "",
+					"description": "有道云秘钥"
+				}
+			}
+		}
 	},
 	"scripts": {
 		"lint": "eslint .",
@@ -27,13 +64,17 @@
 		"test": "node ./test/runTest.js"
 	},
 	"devDependencies": {
-		"@types/vscode": "^1.46.0",
 		"@types/glob": "^7.1.3",
 		"@types/mocha": "^8.0.4",
 		"@types/node": "^12.11.7",
+		"@types/vscode": "^1.46.0",
+		"crypto": "^1.0.1",
 		"eslint": "^7.15.0",
 		"glob": "^7.1.6",
+		"humps": "^2.0.1",
 		"mocha": "^8.1.3",
+		"request": "^2.88.2",
+		"request-promise": "^4.2.6",
 		"typescript": "^4.1.2",
 		"vscode-test": "^1.4.1"
 	}

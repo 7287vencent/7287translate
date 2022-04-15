@@ -1,34 +1,25 @@
-// The module 'vscode' contains the VS Code extensibility API
-// Import the module and reference it with the alias vscode in your code below
 const vscode = require('vscode');
 
-// this method is called when your extension is activated
-// your extension is activated the very first time the command is executed
 
+const {
+	registerInputTranslate,
+	registerHoverTranslate
+} = require('./src/index.js')
 /**
  * @param {vscode.ExtensionContext} context
  */
 function activate(context) {
-
-	// Use the console to output diagnostic information (console.log) and errors (console.error)
-	// This line of code will only be executed once when your extension is activated
-	console.log('Congratulations, your extension "7287translate" is now active!');
-
-	// The command has been defined in the package.json file
-	// Now provide the implementation of the command with  registerCommand
-	// The commandId parameter must match the command field in package.json
-	let disposable = vscode.commands.registerCommand('7287translate.helloWorld', function () {
-		// The code you place here will be executed every time your command is executed
-
-		// Display a message box to the user
-		vscode.window.showInformationMessage('Hello World from 7287translate!');
-	});
-
-	context.subscriptions.push(disposable);
+	console.log("开始插件")
+	// ? 注册 输入 翻译
+	const inputTranslate = registerInputTranslate()
+	// ? 注册 悬浮 翻译
+	const hoverTranslate = registerHoverTranslate()
+	context.subscriptions.push(inputTranslate);
+	context.subscriptions.push(hoverTranslate);
 }
+
 exports.activate = activate;
 
-// this method is called when your extension is deactivated
 function deactivate() {}
 
 module.exports = {
