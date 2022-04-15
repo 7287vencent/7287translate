@@ -20,13 +20,13 @@
 				"title": "7287translate"
 			},
 			{
-				"command": "extension.startTranslate",
-				"title": "翻译并朗读"
+				"command": "extension.keyTranslate",
+				"title": "7287翻译"
 			}
 		],
 		"keybindings": [
 			{
-				"command": "extension.startTranslate",
+				"command": "extension.keyTranslate",
 				"key": "ctrl+shift+t",
 				"mac": "cmd+shift+t",
 				"when": "editorHasSelection"
@@ -35,7 +35,7 @@
 		"menus": {
 			"editor/context": [
 				{
-					"command": "extension.startTranslate",
+					"command": "extension.keyTranslate",
 					"group": "navigation",
 					"when": "editorHasSelection"
 				}

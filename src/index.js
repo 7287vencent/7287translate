@@ -31,6 +31,32 @@ const inputTranslate = () => {
 }
 
 /**
+ * 注册 左下角的 侧边栏
+ */
+const initBarItem = () => {
+  const barItem = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Left)
+  barItem.command = 'extension.statusBarClick'
+  barItem.text = `7287翻译`;
+  barItem.show();
+}
+initBarItem()
+
+const keyTranslateHandler = async () => {
+  // ?
+  console.log("点击了右键") 
+  let editor = vscode.window.activeTextEditor;
+  let doc = editor.document;
+  if (editor.selection.isEmpty) {
+    console.log("什么都没有选中")
+    return
+  }
+  let text = doc.getText(editor.selection);
+  let msg = await YouDaoTranslate(text)
+  showMessage(msg)
+  // vscode.Hover(msg)
+}
+
+/**
  * 注册 输入 翻译
  * @returns 
  */
@@ -46,7 +72,28 @@ const registerHoverTranslate = () => {
     provideHover
   })
 }
+/**
+ * 注册 点击 翻译
+ */
+const registerClickTranslate = () => {
+  return vscode.commands.registerCommand('extension.statusBarClick', inputTranslate);
+}
+
+/**
+ * 注册 右键 翻译
+ */
+const registerKeyBindsTranslate = () => {
+  return vscode.commands.registerCommand('extension.keyTranslate', keyTranslateHandler);
+}
+
+
+
+/**
+ * 
+ */
 module.exports = {
   registerInputTranslate,
-  registerHoverTranslate
+  registerHoverTranslate,
+  registerClickTranslate,
+  registerKeyBindsTranslate
 }
