@@ -41,6 +41,9 @@ const initBarItem = () => {
 }
 initBarItem()
 
+/**
+ * 右键翻译
+ */
 const keyTranslateHandler = async () => {
   // ?
   console.log("点击了右键") 
@@ -54,6 +57,14 @@ const keyTranslateHandler = async () => {
   let msg = await YouDaoTranslate(text)
   showMessage(msg)
   // vscode.Hover(msg)
+}
+
+const selectTranslateHandler = (document, positions, token) => {
+  // ? 获取文本
+  console.log("开始滑动单词")
+  // let select = document.getText(vscode.window.activeTextEditor.selection)
+  // console.log("vscode", vscode.window.activeTextEditor)
+  // console.log("文本", select)
 }
 
 /**
@@ -72,6 +83,20 @@ const registerHoverTranslate = () => {
     provideHover
   })
 }
+
+const registerSelectTranslate = () => {
+  console.log("注册鼠标")
+  return vscode.languages.registerSelectionRangeProvider({
+    scheme: "file",
+    language: "html",
+  },
+  {
+    provideSelectionRanges(document, positions, token) {
+      console.log("触发动作")
+    },
+  })
+}
+
 /**
  * 注册 点击 翻译
  */
@@ -95,5 +120,6 @@ module.exports = {
   registerInputTranslate,
   registerHoverTranslate,
   registerClickTranslate,
-  registerKeyBindsTranslate
+  registerKeyBindsTranslate,
+  registerSelectTranslate
 }
