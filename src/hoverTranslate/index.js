@@ -21,12 +21,12 @@ ${translation.replace(
 )}`;
 };
 async function provideHover(document, position, token) {
+  let text = document.getText(document.getWordRangeAtPosition(position));
   console.log("滑动单词");
   // ? 获取单词
-  let text = document.getText(document.getWordRangeAtPosition(position));
-  // console.log("选择的单词", text)
+  console.log("选择的单词", text);
   let select = document.getText(vscode.window.activeTextEditor.selection);
-  // console.log("滑动选择的单词", select)
+  console.log("滑动选择的单词", select);
   // ? 选择的单词优先及更高
   if (select && select.includes(text)) {
     text = select;

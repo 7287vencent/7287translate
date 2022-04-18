@@ -5,7 +5,7 @@ const {
   registerHoverTranslate,
   registerClickTranslate,
   registerKeyBindsTranslate,
-  registerSelectTranslate,
+  // registerSelectTranslate,
 } = require("./src/index.js");
 /**
  * @param {vscode.ExtensionContext} context
